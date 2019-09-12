@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 
-public interface ApiInterface {
+public interface NewsApi {
 
     @GET("top-headlines")
     Call<News> getNews(
