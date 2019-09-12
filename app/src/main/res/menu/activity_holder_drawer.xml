@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_menu_news"
+            android:title="@string/menu_news" />
+        <item
+            android:id="@+id/nav_sources"
+            android:icon="@drawable/ic_menu_sources"
+            android:title="@string/menu_sources" />
+        <item
+            android:id="@+id/nav_weather"
+            android:icon="@drawable/ic_menu_weather"
+            android:title="@string/menu_weather" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_profile"
+            android:title="@string/menu_profile" />
+        <item
+            android:id="@+id/nav_signout"
+            android:icon="@drawable/ic_menu_signout"
+            android:title="@string/menu_signout" />
+    </group>
+
+</menu>

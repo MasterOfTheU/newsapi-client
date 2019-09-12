@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.newsapiclient.R;
-import com.newsapiclient.ui.HomeActivity;
-import com.newsapiclient.util.ExtraConstants;
+import com.newsapiclient.client.HolderActivity;
+import com.newsapiclient.util.Constants;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate: mExistsInDatabase: " + mExistsInDatabase);
         Log.d(TAG, "onCreate: mExistsInDatabaseEmail: " + mExistsInDatabaseEmail);
         Log.d(TAG, "onCreate: mProfileIsSetup: " + mProfileIsSetup);
-
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ExtraConstants.RC_SIGN_IN) {
+        if (requestCode == Constants.RC_SIGN_IN) {
             if (resultCode == RESULT_OK) {
                 Log.d(TAG, "Login request processed");
                 FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 displayToast("Login failed");
                 showLoginScreen();
             }
-        } else if (requestCode == ExtraConstants.RC_SIGN_UP) {
+        } else if (requestCode == Constants.RC_SIGN_UP) {
             if (resultCode == RESULT_OK) {
                 Log.d(TAG, "onActivityResult: Sign up request processed");
                 displayToast("Registration complete");
@@ -120,27 +119,26 @@ public class MainActivity extends AppCompatActivity {
     private void showProfileSetupScreen() {
         Log.d(TAG, "showProfileSetupScreen: Redirecting");
         Intent profileSetupIntent =
-                new Intent(MainActivity.this, ProfileSetupActivity.class);
+                new Intent(this, ProfileSetupActivity.class);
         startActivity(profileSetupIntent);
         finish();
     }
 
     private void showSignupScreen() {
         Log.d(TAG, "showSignupScreen: Redirecting");
-        Intent signupIntent = new Intent(MainActivity.this, SignupActivity.class);
-        startActivityForResult(signupIntent, ExtraConstants.RC_SIGN_UP);
+        Intent signupIntent = new Intent(this, SignupActivity.class);
+        startActivityForResult(signupIntent, Constants.RC_SIGN_UP);
     }
 
     private void showLoginScreen() {
         Log.d(TAG, "showLoginScreen: Redirecting");
-        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivityForResult(loginIntent, ExtraConstants.RC_SIGN_IN);
-        finish();
+        Intent loginIntent = new Intent(this, LoginActivity.class);
+        startActivityForResult(loginIntent, Constants.RC_SIGN_IN);
     }
 
     private void updateUI() {
         Log.d(TAG, "updateUI: Redirecting to home screen");
-        Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
+        Intent homeIntent = new Intent(this, HolderActivity.class);
         startActivity(homeIntent);
         finish();
     }

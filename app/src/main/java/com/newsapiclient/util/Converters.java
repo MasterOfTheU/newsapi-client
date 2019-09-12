@@ -5,6 +5,7 @@ import android.util.Log;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -55,4 +56,18 @@ public abstract class Converters {
 
     //endregion
 
+    //region Retrofit
+    public static String createSingleSourcesQuery(List<String> sourcesList) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < sourcesList.size(); i++) {
+            sb.append(sourcesList.get(i));
+            if (i >= sourcesList.size()) {
+                break;
+            } else {
+                sb.append("&");
+            }
+        }
+        return sb.toString();
+    }
+    //endregion
 }

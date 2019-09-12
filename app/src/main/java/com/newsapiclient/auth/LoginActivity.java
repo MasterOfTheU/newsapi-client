@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.newsapiclient.R;
 import com.newsapiclient.model.User;
-import com.newsapiclient.util.ExtraConstants;
+import com.newsapiclient.util.Constants;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
-
 
     private EditText mEmailField;
     private EditText mPasswordField;
@@ -126,7 +125,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void showSignupScreen() {
         Intent signupIntent = new Intent(LoginActivity.this, SignupActivity.class);
-        startActivityForResult(signupIntent, ExtraConstants.RC_SIGN_UP);
+        startActivityForResult(signupIntent, Constants.RC_SIGN_UP);
     }
 
     private void loginUser() {

@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.newsapiclient.R;
-import com.newsapiclient.ui.HomeActivity;
+import com.newsapiclient.client.HolderActivity;
 import com.newsapiclient.util.Converters;
 import com.newsapiclient.util.DatePickerFragment;
 
@@ -73,7 +73,7 @@ public class ProfileSetupActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void showHomeScreen() {
-        Intent homeIntent = new Intent(ProfileSetupActivity.this, HomeActivity.class);
+        Intent homeIntent = new Intent(ProfileSetupActivity.this, HolderActivity.class);
         startActivity(homeIntent);
         finish();
     }
