@@ -93,4 +93,10 @@ public class Source {
         this.country = country;
     }
 
+    @Override
+    public String toString() {
+        return "Source{" +
+                "id='" + id + '\'' +
+                ", name='" + name;
+    }
 }

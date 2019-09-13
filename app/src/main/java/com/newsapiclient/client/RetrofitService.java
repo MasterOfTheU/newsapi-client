@@ -8,20 +8,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
 
-    public static Retrofit retrofit;
-
-    public static Retrofit getApiClient() {
-        if (retrofit == null) {
-
-            retrofit = new Retrofit.Builder()
+    public static Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-
-        }
-
-        return retrofit;
-    }
 
     public static <S> S createService(Class<S> serviceClass) {
         return retrofit.create(serviceClass);

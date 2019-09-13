@@ -2,6 +2,7 @@ package com.newsapiclient.client.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +27,10 @@ import com.newsapiclient.model.Article;
 
 import java.util.List;
 
-
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleViewHolder> {
 
+    private static final String TAG = "ArticleAdapter";
+    
     private List<Article> articles;
     private Context context;
     private OnItemClickListener onItemClickListener;
@@ -49,30 +51,36 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleAdapter.ArticleV
     public void onBindViewHolder(@NonNull ArticleViewHolder holder, int position) {
         final ArticleViewHolder articleViewHolder = holder;
         Article article = articles.get(position);
-
+        Log.d(TAG, "onBindViewHolder: article: " + article.toString());
         // Glide request options
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
         requestOptions.centerCrop();
 
-        Glide.with(context)
-                .load(article.getUrlToImage())
-                .apply(requestOptions)
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        articleViewHolder.mProgressLoad.setVisibility(View.GONE);
-                        return false;
-                    }
+        Log.d(TAG, "onBindViewHolder: imgUrl: " + article.getUrlToImage());
+        if (article.getUrlToImage() != null) {
+            Glide.with(context)
+                    .load(article.getUrlToImage())
+                    .apply(requestOptions)
+                    .listener(new RequestListener<Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                            articleViewHolder.mProgressLoad.setVisibility(View.GONE);
+                            return false;
+                        }
 
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        articleViewHolder.mProgressLoad.setVisibility(View.GONE);
-                        return false;
-                    }
-                })
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(articleViewHolder.mArticleImg);
+                        @Override
+                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                            articleViewHolder.mProgressLoad.setVisibility(View.GONE);
+                            return false;
+                        }
+                    })
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(articleViewHolder.mArticleImg);
+        } else {
+            // TODO: 9/12/19 change this bg later according to app theme color
+            articleViewHolder.mArticleImg.setBackgroundResource(R.drawable.side_nav_bar);
+        }
 
         articleViewHolder.mTitle.setText(article.getTitle());
         articleViewHolder.mDescription.setText(article.getDescription());
